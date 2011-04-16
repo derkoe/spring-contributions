@@ -1,4 +1,5 @@
 #summary Short introduction to the features of Spring Contributions.
+#labels Featured
 
 = Introduction =
 
