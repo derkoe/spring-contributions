@@ -18,6 +18,8 @@ Ordered contributions may be used for:
   * some GoF patterns (like chain of responsibility or commnad)
   * or a menu system (a menu service getting a list of menu items from different modules)
 
+Details about the ordering may be found in [OrderingOfContributions Ordering of Contributions].
+
 = Mapped Contributions =
 	
 Module 1:
