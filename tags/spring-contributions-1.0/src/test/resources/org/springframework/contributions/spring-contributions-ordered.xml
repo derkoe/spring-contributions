@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ctr="http://www.springframework.org/schema/contributions"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/contributions http://www.springframework.org/schema/contributions/spring-contributions-3.0.xsd">
+
+	<bean id="callService" class="org.springframework.contributions.impl.CallServiceImpl">
+		<constructor-arg>
+			<ctr:contribution-ref name="callables" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="callableHolder" class="org.springframework.contributions.impl.CallableHolderServiceImpl">
+		<constructor-arg>
+			<ctr:contribution-ref name="callables" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="serviceWithoutContribution" class="org.springframework.contributions.impl.ServiceWithoutContribution">
+		<constructor-arg>
+			<ctr:contribution-ref name="empty" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="Two" class="org.springframework.contributions.impl.CallableTwo">
+		<constructor-arg ref="logBuffer" />
+		<ctr:contribute to="callables" constraints="after:One" />
+	</bean>
+
+	<bean name="One" class="org.springframework.contributions.impl.CallableOne"
+		ctr:contributeTo="callables">
+		<constructor-arg ref="logBuffer"/>
+	</bean>
+
+	<bean name="Three" class="org.springframework.contributions.impl.GenericCallable">
+		<constructor-arg ref="logBuffer"/>
+		<constructor-arg value="Three"/>
+	</bean>
+
+	<ctr:contribution to="callables">
+		<ctr:entry name="Three" ref="Three" constraints="after:*"/>
+	</ctr:contribution>
+
+	<bean name="logBuffer" class="java.lang.StringBuilder" />
+
+	<bean class="org.springframework.contributions.ValueHolder">
+		<constructor-arg>
+			<ctr:contribution-ref name="value-list" />
+		</constructor-arg>
+	</bean>
+
+	<ctr:contribution to="value-list">
+		<ctr:entry name="string3" value="String 3" constraints="after:string2" />
+		<ctr:entry name="string1" value="String 1" constraints="before:*" />
+		<ctr:entry name="string2" value="String 2" constraints="after:string1,before:string3" />
+	</ctr:contribution>
+
+</beans>
