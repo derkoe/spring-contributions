@@ -9,13 +9,14 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.contributions.impl.Hen;
 import org.springframework.contributions.impl.ServiceWithoutContribution;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-@ContextConfiguration("spring-contributions-ordered.xml")
+@ContextConfiguration("spring-contributions-ordered-services.xml")
 @TestExecutionListeners(DependencyInjectionTestExecutionListener.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class OrderedContributionIntegrationTest
@@ -34,6 +35,9 @@ public class OrderedContributionIntegrationTest
 	
 	@Autowired
 	private ValueHolder stringHolder;
+	
+	@Autowired
+	private Hen hen;
 
 	@Test
 	public void testOrderedContribution()
@@ -55,5 +59,10 @@ public class OrderedContributionIntegrationTest
 	public void testStringContribution()
 	{
 		assertThat(stringHolder.getValues(), is(Arrays.asList("String 1", "String 2", "String 3")));
+	}
+	
+	@Test
+	public void testHenAndEggs() {
+		System.out.println(hen);
 	}
 }
