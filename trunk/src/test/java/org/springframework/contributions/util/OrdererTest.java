@@ -84,6 +84,19 @@ public class OrdererTest
 	}
 
 	@Test
+	public void testConstraintPersistence() {
+        final List<TestEntry> list = new ArrayList<TestEntry>();
+
+        list.add(new TestEntry("c", "after: a", "b"));
+        list.add(new TestEntry("a"));
+        list.add(new TestEntry("b"));
+
+        List<TestEntry> result = Orderer.build(list);
+        
+        Assert.assertEquals("[a, b, c]", result.toString());
+	}
+	
+	@Test
 	public void testComplex()
 	{
 		System.out.println("Complex:");

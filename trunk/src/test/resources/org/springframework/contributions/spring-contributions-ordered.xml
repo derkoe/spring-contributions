@@ -24,13 +24,35 @@
 
 	<bean id="Two" class="org.springframework.contributions.impl.CallableTwo">
 		<constructor-arg ref="logBuffer" />
+		<constructor-arg ref="twoValue" />
 		<ctr:contribute to="callables" constraints="after:One" />
+	</bean>
+	
+<!--	<bean id="Two" class="org.springframework.contributions.impl.CallableTwo">-->
+<!--		<constructor-arg ref="logBuffer" />-->
+<!--		<constructor-arg ref="twoValue" />-->
+<!--	</bean>-->
+<!--	-->
+<!--	<ctr:contribution to="callables">-->
+<!--		<ctr:entry name="Two" ref="Two" constraints="after:One"/>-->
+<!--	</ctr:contribution>-->
+
+	<bean id="twoValue" class="java.lang.String">
+		<constructor-arg value="Two"/>
 	</bean>
 
 	<bean name="One" class="org.springframework.contributions.impl.CallableOne"
 		ctr:contributeTo="callables">
 		<constructor-arg ref="logBuffer"/>
 	</bean>
+	
+<!--	<bean name="One" class="org.springframework.contributions.impl.CallableOne">-->
+<!--		<constructor-arg ref="logBuffer"/>-->
+<!--	</bean>-->
+<!--	-->
+<!--	<ctr:contribution to="callables">-->
+<!--		<ctr:entry name="One" ref="One" />-->
+<!--	</ctr:contribution>-->
 
 	<bean name="Three" class="org.springframework.contributions.impl.GenericCallable">
 		<constructor-arg ref="logBuffer"/>
@@ -53,6 +75,25 @@
 		<ctr:entry name="string3" value="String 3" constraints="after:string2" />
 		<ctr:entry name="string1" value="String 1" constraints="before:*" />
 		<ctr:entry name="string2" value="String 2" constraints="after:string1,before:string3" />
+	</ctr:contribution>
+	
+	<bean id="hen" class="org.springframework.contributions.impl.Hen">
+		<constructor-arg>
+			<ctr:contribution-ref name="eggs" />
+		</constructor-arg>
+		<constructor-arg value="Foghorn Leghorn" />
+	</bean>
+	
+	<ctr:contribution to="eggs">
+		<ctr:entry name="One">
+			<bean class="org.springframework.contributions.impl.Egg" autowire="constructor" />
+		</ctr:entry>
+		<ctr:entry name="Two">
+			<bean class="org.springframework.contributions.impl.Egg" autowire="constructor" />
+		</ctr:entry>
+		<ctr:entry name="Three">
+			<bean class="org.springframework.contributions.impl.Egg" autowire="constructor" />
+		</ctr:entry>
 	</ctr:contribution>
 
 </beans>

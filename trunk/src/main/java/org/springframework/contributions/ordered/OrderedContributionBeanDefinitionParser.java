@@ -16,7 +16,6 @@ import org.w3c.dom.NodeList;
 
 /**
  * Parses <code>contribution</code> tags in Spring XML config.
- *
  * @author Christian K&ouml;berl
  */
 public class OrderedContributionBeanDefinitionParser implements BeanDefinitionParser
@@ -24,8 +23,9 @@ public class OrderedContributionBeanDefinitionParser implements BeanDefinitionPa
     /**
      * {@inheritDoc}
      */
+    @Override
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public BeanDefinition parse(Element element, ParserContext parserContext)
+    public BeanDefinition parse(final Element element, final ParserContext parserContext)
     {
         String contributionName = element.getAttribute("to");
         String beanName = ORDERED_CONTRIBUTION_PREFIX + contributionName;
@@ -35,7 +35,7 @@ public class OrderedContributionBeanDefinitionParser implements BeanDefinitionPa
         List contributionList;
         if (registry.containsBeanDefinition(beanName))
         {
-            beanDefinition = parserContext.getRegistry().getBeanDefinition(beanName);
+            beanDefinition = registry.getBeanDefinition(beanName);
             contributionList = (List) beanDefinition.getPropertyValues().getPropertyValue("contributionList")
                 .getValue();
         }
@@ -46,6 +46,9 @@ public class OrderedContributionBeanDefinitionParser implements BeanDefinitionPa
             contributionList = new ManagedList();
             builder.addPropertyValue("contributionList", contributionList);
             beanDefinition = builder.getBeanDefinition();
+            
+            // FIX by ORT
+            registry.registerBeanDefinition(beanName, beanDefinition);
         }
 
         NodeList entryList = element.getElementsByTagNameNS(CONTRIBUTION_NAMESPACE, "entry");
@@ -60,7 +63,7 @@ public class OrderedContributionBeanDefinitionParser implements BeanDefinitionPa
                 beanValueOrReference,
                 constraints));
         }
-
+        
         return beanDefinition;
     }
 }
