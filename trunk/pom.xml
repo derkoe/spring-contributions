@@ -9,7 +9,7 @@
 
 	<groupId>com.googlecode.spring-contributions </groupId>
 	<artifactId>spring-contributions</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>Spring Contributions</name>
@@ -62,9 +62,9 @@
 	</dependencies>
 
 	<scm>
-		<connection>scm:svn:http://spring-contributions.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://spring-contributions.googlecode.com/svn/trunk/</developerConnection>
-		<url>http://code.google.com/p/spring-contributions/source/browse/</url>
+		<connection>scm:svn:http://spring-contributions.googlecode.com/svn/tags/spring-contributions-1.0.1</connection>
+		<developerConnection>scm:svn:https://spring-contributions.googlecode.com/svn/tags/spring-contributions-1.0.1</developerConnection>
+		<url>http://code.google.com/p/spring-contributions/source/browse/tags/spring-contributions-1.0.1</url>
 	</scm>
 
 	<developers>
