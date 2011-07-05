@@ -6,16 +6,16 @@
 
 	<import resource="spring-contributions-ordered.xml"/>
 
-<!--	<bean id="callService" class="org.springframework.contributions.impl.CallServiceImpl">-->
-<!--		<constructor-arg>-->
-<!--			<ctr:contribution-ref name="callables" />-->
-<!--		</constructor-arg>-->
-<!--	</bean>-->
-<!---->
-<!--	<bean id="callableHolder" class="org.springframework.contributions.impl.CallableHolderServiceImpl">-->
-<!--		<constructor-arg>-->
-<!--			<ctr:contribution-ref name="callables" />-->
-<!--		</constructor-arg>-->
-<!--	</bean>-->
+	<bean id="callService" class="org.springframework.contributions.impl.CallServiceImpl">
+		<constructor-arg>
+			<ctr:contribution-ref name="callables" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="callableHolder" class="org.springframework.contributions.impl.CallableHolderServiceImpl">
+		<constructor-arg>
+			<ctr:contribution-ref name="callables" />
+		</constructor-arg>
+	</bean>
 
 </beans>
