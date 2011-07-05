@@ -23,7 +23,6 @@ public class OrderedContributionBeanDefinitionParser implements BeanDefinitionPa
     /**
      * {@inheritDoc}
      */
-    @Override
     @SuppressWarnings({"unchecked", "rawtypes"})
     public BeanDefinition parse(final Element element, final ParserContext parserContext)
     {
@@ -46,8 +45,7 @@ public class OrderedContributionBeanDefinitionParser implements BeanDefinitionPa
             contributionList = new ManagedList();
             builder.addPropertyValue("contributionList", contributionList);
             beanDefinition = builder.getBeanDefinition();
-            
-            // FIX by ORT
+
             registry.registerBeanDefinition(beanName, beanDefinition);
         }
 
