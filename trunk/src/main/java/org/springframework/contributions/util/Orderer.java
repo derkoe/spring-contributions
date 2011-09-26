@@ -13,21 +13,21 @@ import java.util.regex.PatternSyntaxException;
 
 /**
  * <p>
- * Orders lists by using "before" and "after" constraints. The elements to be ordered must implement
- * {@link Orderable}. The before and after definitions may contain the explicit id, wildcards like
- * "*" and "?" or regular expressions. The regular expressions must be surrounded by "/.../". The
- * algorithm considers explicitly named constraints more important than those using wildcards or
- * regular expressions. The ordering of elements without constraints is preserved.
+ * Orders lists by using "before" and "after" constraints. The elements to be ordered must implement {@link Orderable}.
+ * The before and after definitions may contain the explicit id, wildcards like "*" and "?" or regular expressions. The
+ * regular expressions must be surrounded by "/.../". The algorithm considers explicitly named constraints more
+ * important than those using wildcards or regular expressions. The ordering of elements without constraints is
+ * preserved.
  * </p>
  * <p>
- * A note on performance: The complexity of the algorithm is O(n^2). But the algorithm highly
- * depends on regular expressions, if those are specified within the constraints (the wildcards are
- * also transformed into regular expressions). Compiling the expressions is quite slow. Thus the
- * runtime of the algorithm highly depends on the number of regular expressions used in the
- * constraints and not so much on the number of elements in the list. The algorithm compiles each
- * regular expression only once and contains an optimization for "*"-constraints, since these are
- * quite common.
+ * A note on performance: The complexity of the algorithm is O(n^2). But the algorithm highly depends on regular
+ * expressions, if those are specified within the constraints (the wildcards are also transformed into regular
+ * expressions). Compiling the expressions is quite slow. Thus the runtime of the algorithm highly depends on the number
+ * of regular expressions used in the constraints and not so much on the number of elements in the list. The algorithm
+ * compiles each regular expression only once and contains an optimization for "*"-constraints, since these are quite
+ * common.
  * </p>
+ * 
  * @author Manfred Hantschel
  */
 public final class Orderer
@@ -55,6 +55,7 @@ public final class Orderer
 
     /**
      * A node of the net of {@link Orderable} entries
+     * 
      * @author Manfred HANTSCHEL
      * @param <TYPE> the type of the entry
      */
@@ -67,6 +68,7 @@ public final class Orderer
 
         /**
          * Creates a new node holding the specified value
+         * 
          * @param value the value, may be null
          */
         public OrderableNode(final TYPE value)
@@ -80,8 +82,8 @@ public final class Orderer
         }
 
         /**
-         * Returns the id of the entry. Calls the {@link Orderable}.getOrderId() method of the
-         * value.
+         * Returns the id of the entry. Calls the {@link Orderable}.getOrderId() method of the value.
+         * 
          * @return the id of the entry
          */
 
@@ -92,6 +94,7 @@ public final class Orderer
 
         /**
          * Adds an "after" dependency to the node, if the dependency is not yet present
+         * 
          * @param dependency the dependency
          */
         public void after(final OrderableNode<TYPE> dependency)
@@ -103,6 +106,7 @@ public final class Orderer
 
         /**
          * Returns true if this node contains the specified dependency
+         * 
          * @param dependency the dependency
          * @return true if this node contains the specified dependency
          */
@@ -126,6 +130,7 @@ public final class Orderer
 
         /**
          * Describes a dependency cycle
+         * 
          * @param dependency the dependency
          * @return the description of the cycle
          */
@@ -150,6 +155,7 @@ public final class Orderer
 
         /**
          * Returns true if all after constraints of the node are resolved
+         * 
          * @return true if all after constraints of the node are resolved
          */
         public boolean isResolved()
@@ -210,6 +216,7 @@ public final class Orderer
 
     /**
      * Creates a new ordered list
+     * 
      * @param <TYPE> the type to be ordered, must extend {@link Orderable}
      * @param collection the collection to be ordered
      * @return the ordered list
@@ -224,9 +231,9 @@ public final class Orderer
     }
 
     /**
-     * Reorders the list. Tries to preserve the original ordering as much as possible. Considers
-     * explicitly named constraints more important than those using wildcards or regular
-     * expressions.
+     * Reorders the list. Tries to preserve the original ordering as much as possible. Considers explicitly named
+     * constraints more important than those using wildcards or regular expressions.
+     * 
      * @param <TYPE> the type to be ordered, must extend {@link Orderable}
      * @param list the list
      */
@@ -259,6 +266,7 @@ public final class Orderer
 
     /**
      * Describes the constraints in the list
+     * 
      * @param <TYPE> the type to be ordered, must extend {@link Orderable}
      * @param list the list
      * @return the description
@@ -287,13 +295,14 @@ public final class Orderer
 
     /**
      * Builds the map of {@link OrderableNode}s.
+     * 
      * @param <TYPE> the type of the entries
      * @param list the list containing the entries
      * @return the map
      * @throws IllegalArgumentException if multiple entries share the same key
      */
     private static <TYPE extends Orderable> Map<String, OrderableNode<TYPE>> buildMap(final List<TYPE> list)
-                                                                                                            throws IllegalArgumentException
+        throws IllegalArgumentException
     {
         final Map<String, OrderableNode<TYPE>> map = new LinkedHashMap<String, OrderableNode<TYPE>>(list.size());
 
@@ -331,6 +340,7 @@ public final class Orderer
 
     /**
      * Builds the constraints in the {@link OrderableNode}s.
+     * 
      * @param <TYPE> the type of the entries
      * @param map the map
      * @param list the list containing the entries
@@ -338,8 +348,7 @@ public final class Orderer
      * @throws IllegalArgumentException if a constraint uses an invalid formatting
      */
     private static <TYPE extends Orderable> void buildConstraints(final Map<String, OrderableNode<TYPE>> map,
-                                                                  final List<TYPE> list, final boolean useWildcards)
-                                                                                                                    throws IllegalArgumentException
+        final List<TYPE> list, final boolean useWildcards) throws IllegalArgumentException
     {
         for (final TYPE orderable : list)
         {
@@ -409,8 +418,8 @@ public final class Orderer
     }
 
     /**
-     * Extracts all references of a constraint. The references may be split by ','. The results will
-     * get trimmed.
+     * Extracts all references of a constraint. The references may be split by ','. The results will get trimmed.
+     * 
      * @param constraint the constraint
      * @return the references
      */
@@ -421,6 +430,7 @@ public final class Orderer
 
     /**
      * Builds all constraints by equality.
+     * 
      * @param <TYPE> the type of the entries
      * @param node the node containing the references that should be matched
      * @param map the map containing all nodes
@@ -428,8 +438,7 @@ public final class Orderer
      * @param references all references
      */
     private static <TYPE extends Orderable> void buildConstraintsByEquality(final OrderableNode<TYPE> node,
-                                                                            final Map<String, OrderableNode<TYPE>> map,
-                                                                            final boolean before, final String reference)
+        final Map<String, OrderableNode<TYPE>> map, final boolean before, final String reference)
     {
         for (final OrderableNode<TYPE> current : map.values())
         {
@@ -449,6 +458,7 @@ public final class Orderer
 
     /**
      * Builds the constraints by checking the reference for equality
+     * 
      * @param <TYPE> the type of the entries
      * @param ancestor the node which should come before the descendant
      * @param descendant the node which should follow the ancestor
@@ -457,9 +467,7 @@ public final class Orderer
      * @param reference the reference
      */
     private static <TYPE extends Orderable> void buildConstraintsByEquality(final OrderableNode<TYPE> ancestor,
-                                                                            final OrderableNode<TYPE> descendant,
-                                                                            final String declarator, final String id,
-                                                                            final String reference)
+        final OrderableNode<TYPE> descendant, final String declarator, final String id, final String reference)
     {
         if (reference.equals(id))
         {
@@ -478,6 +486,7 @@ public final class Orderer
 
     /**
      * Builds all constraints if the reference is a wildcard
+     * 
      * @param <TYPE> the type of the entries
      * @param node the node containing the references that should be matched
      * @param map the map containing all nodes
@@ -485,8 +494,7 @@ public final class Orderer
      * @param reference the reference
      */
     private static <TYPE extends Orderable> void buildConstraintsByMatch(final OrderableNode<TYPE> node,
-                                                                         final Map<String, OrderableNode<TYPE>> map,
-                                                                         final boolean before, final String reference)
+        final Map<String, OrderableNode<TYPE>> map, final boolean before, final String reference)
     {
         final Pattern pattern = extractPattern(node.getId(), reference);
 
@@ -511,6 +519,7 @@ public final class Orderer
 
     /**
      * Builds the constraints by using the specified pattern
+     * 
      * @param <TYPE> the type of the entries
      * @param ancestor the node which should come before the descendant
      * @param descendant the node which should follow the ancestor
@@ -519,9 +528,7 @@ public final class Orderer
      * @param reference the pattern for the reference
      */
     private static <TYPE extends Orderable> void buildConstraintsByMatch(final OrderableNode<TYPE> ancestor,
-                                                                         final OrderableNode<TYPE> descendant,
-                                                                         final String declarator, final String id,
-                                                                         final Pattern reference)
+        final OrderableNode<TYPE> descendant, final String declarator, final String id, final Pattern reference)
     {
         if ((reference.matcher(id).matches()) && (!ancestor.contains(descendant)))
         {
@@ -531,13 +538,14 @@ public final class Orderer
 
     /**
      * Extracts a pattern, if there is one specified
+     * 
      * @param declarator the id of the node which declarates the reference
      * @param reference the reference
      * @return the pattern or null if the reference is no pattern
      * @throws IllegalArgumentException if the pattern is invalid
      */
     private static Pattern extractPattern(final String declarator, final String reference)
-                                                                                          throws IllegalArgumentException
+        throws IllegalArgumentException
     {
         // optimization for the most common pattern
         if (JOKER.equals(reference))
@@ -570,6 +578,7 @@ public final class Orderer
 
     /**
      * Returns true if the reference is a regular expression
+     * 
      * @param reference the reference
      * @return true if the reference is a regular expression
      */
@@ -581,6 +590,7 @@ public final class Orderer
 
     /**
      * Returns true if the reference contains wildcards
+     * 
      * @param reference the reference
      * @return true if the reference contains wildcards
      */
