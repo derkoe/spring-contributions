@@ -27,7 +27,6 @@ public class DictionaryComparator implements Comparator<Orderable>
     /**
      * {@inheritDoc}
      */
-    @Override
     public int compare(final Orderable left, final Orderable right)
     {
         return DICTIONARY_COLLATOR.compare(left.getOrderableId(), right.getOrderableId());
