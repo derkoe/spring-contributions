@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ctr="http://www.springframework.org/schema/contributions"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/contributions http://www.springframework.org/schema/contributions/spring-contributions-3.0.xsd">
+
+	<bean id="TemperStrategy" class="org.springframework.contributions.ioc.services.strategy.StrategyFactoryBean">
+		<constructor-arg value="org.springframework.contributions.strategy.TemperStrategyService" />
+		<constructor-arg>
+			<ctr:mapped-contribution-ref name="temperStrategies" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id="red" class="org.springframework.contributions.strategy.strategies.RedTemperStrategy" />
+	
+	<bean id="green" class="org.springframework.contributions.strategy.strategies.GreenTemperStrategy" />
+	
+	<bean id="color" class="org.springframework.contributions.strategy.strategies.ColorTemperStrategy" />
+	
+	<ctr:mapped-contribution to="temperStrategies">
+		<entry>
+			<key>
+				<value>org.springframework.contributions.strategy.entities.Red</value>
+			</key>
+			<ref bean="red" />
+		</entry>
+		<entry>
+			<key>
+				<value>org.springframework.contributions.strategy.entities.Green</value>
+			</key>
+			<ref bean="green" />
+		</entry>
+		<entry>
+			<key>
+				<value>org.springframework.contributions.strategy.Color</value>
+			</key>
+			<ref bean="color" />
+		</entry>
+	</ctr:mapped-contribution>
+
+</beans>
