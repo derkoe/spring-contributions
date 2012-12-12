@@ -2,6 +2,7 @@ package org.springframework.contributions.util;
 
 import java.text.Collator;
 import java.util.Comparator;
+import java.util.Locale;
 
 /**
  * A comparator for {@link Orderable} objects to sort them alphabetical (the case is ignored)
@@ -10,7 +11,6 @@ import java.util.Comparator;
  */
 public class DictionaryComparator implements Comparator<Orderable>
 {
-
     /**
      * A collator set to primary strength, which means 'a', 'A' and '&auml;' is the same
      */
@@ -18,7 +18,7 @@ public class DictionaryComparator implements Comparator<Orderable>
 
     static
     {
-        DICTIONARY_COLLATOR = Collator.getInstance();
+        DICTIONARY_COLLATOR = Collator.getInstance(Locale.ENGLISH);
 
         DICTIONARY_COLLATOR.setStrength(Collator.PRIMARY);
         DICTIONARY_COLLATOR.setDecomposition(Collator.CANONICAL_DECOMPOSITION);
@@ -31,5 +31,4 @@ public class DictionaryComparator implements Comparator<Orderable>
     {
         return DICTIONARY_COLLATOR.compare(left.getOrderableId(), right.getOrderableId());
     }
-
 }
