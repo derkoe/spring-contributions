@@ -47,7 +47,6 @@ public class OrderedConfigurationFactoryBean extends AbstractFactoryBean<List>
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
 	protected List createInstance() throws Exception
 	{
 		if (contributionList == null)
@@ -68,7 +67,6 @@ public class OrderedConfigurationFactoryBean extends AbstractFactoryBean<List>
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
 	public Class<?> getObjectType()
 	{
 		return List.class;

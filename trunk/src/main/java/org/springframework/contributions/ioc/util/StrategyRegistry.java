@@ -180,7 +180,6 @@ public final class StrategyRegistry<A>
     	return null;
     }
 
-    @Override
     public String toString()
     {
         return String.format("StrategyRegistry[%s]", adapterType.getName());

@@ -33,9 +33,11 @@ public class ContributionBeanDefinitionDecorator implements BeanDefinitionDecora
         {
             Attr attr = (Attr) node;
             String contributionName = attr.getValue();
+            OrderedContributionBeenContext beanContext = new OrderedContributionBeenContext(beanName, definition, null);
+
             addToContributionService(
                 contributionName,
-                OrderContributionUtils.createContributionBeanDefinition(beanName, definition, null),
+                OrderContributionUtils.createContributionBeanDefinition(beanContext),
                 parserContext);
         }
         else if (node instanceof Element)
@@ -43,10 +45,11 @@ public class ContributionBeanDefinitionDecorator implements BeanDefinitionDecora
             Element element = (Element) node;
             String contributionName = element.getAttribute("to");
             String constraints = element.getAttribute("constraints");
+            OrderedContributionBeenContext beanContext = new OrderedContributionBeenContext(beanName, definition, constraints);
 
             addToContributionService(
                 contributionName,
-                OrderContributionUtils.createContributionBeanDefinition(beanName, definition, constraints),
+                OrderContributionUtils.createContributionBeanDefinition(beanContext),
                 parserContext);
         }
 

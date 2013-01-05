@@ -1,8 +1,9 @@
 package org.springframework.contributions.impl;
 
+
 public class CallableOne extends GenericCallable
 {
-	CallableOne(StringBuilder logBuffer)
+	public CallableOne(StringBuilder logBuffer)
 	{
 		super(logBuffer, "One");
 	}

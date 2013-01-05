@@ -8,7 +8,7 @@ public class GenericCallable implements Callable
 
 	private final String message;
 
-	GenericCallable(StringBuilder logBuffer, String message)
+	protected GenericCallable(StringBuilder logBuffer, String message)
 	{
 		this.logBuffer = logBuffer;
 		this.message = message;

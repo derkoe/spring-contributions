@@ -15,5 +15,4 @@ public class ValueHolder
 	{
 		return values;
 	}
-	
 }

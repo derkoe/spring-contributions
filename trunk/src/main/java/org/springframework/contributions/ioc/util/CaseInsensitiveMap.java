@@ -134,25 +134,21 @@ public class CaseInsensitiveMap<V> extends AbstractMap<String, V> implements Ser
     @SuppressWarnings("unchecked")
     private class EntrySet extends AbstractSet
     {
-        @Override
         public Iterator iterator()
         {
             return new EntrySetIterator();
         }
 
-        @Override
         public int size()
         {
             return size;
         }
 
-        @Override
         public void clear()
         {
             CaseInsensitiveMap.this.clear();
         }
 
-        @Override
         public boolean contains(Object o)
         {
             if (!(o instanceof Map.Entry)) return false;
@@ -164,7 +160,6 @@ public class CaseInsensitiveMap<V> extends AbstractMap<String, V> implements Ser
             return position.isFound() && position.entry().valueMatches(e.getValue());
         }
 
-        @Override
         public boolean remove(Object o)
         {
             if (!(o instanceof Map.Entry)) return false;
@@ -324,7 +319,6 @@ public class CaseInsensitiveMap<V> extends AbstractMap<String, V> implements Ser
         }
     }
 
-    @Override
     public void clear()
     {
         for (int i = 0; i < size; i++)
@@ -334,20 +328,17 @@ public class CaseInsensitiveMap<V> extends AbstractMap<String, V> implements Ser
         modCount++;
     }
 
-    @Override
     public boolean isEmpty()
     {
         return size == 0;
     }
 
-    @Override
     public int size()
     {
         return size;
     }
 
     @SuppressWarnings("unchecked")
-    @Override
     public V put(String key, V value)
     {
         int hashCode = caseInsenitiveHashCode(key);
@@ -355,26 +346,22 @@ public class CaseInsensitiveMap<V> extends AbstractMap<String, V> implements Ser
         return select(key, hashCode).put(key, hashCode, value);
     }
 
-    @Override
     public boolean containsKey(Object key)
     {
         return select(key).isFound();
     }
 
-    @Override
     public V get(Object key)
     {
         return select(key).get();
     }
 
-    @Override
     public V remove(Object key)
     {
         return select(key).remove();
     }
 
     @SuppressWarnings("unchecked")
-    @Override
     public Set<Map.Entry<String, V>> entrySet()
     {
         if (entrySet == null) entrySet = new EntrySet();

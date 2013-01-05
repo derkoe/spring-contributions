@@ -140,7 +140,6 @@ public class Stack<E>
      *
      * @return string description of the stack
      */
-    @Override
     public String toString()
     {
         StringBuilder builder = new StringBuilder("Stack[");
