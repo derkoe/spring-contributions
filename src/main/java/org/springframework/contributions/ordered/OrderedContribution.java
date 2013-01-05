@@ -63,7 +63,6 @@ public class OrderedContribution implements Orderable
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
 	public String toString()
 	{
 		return "OrderedContribution [beanName=" + beanName + ", constraints=" + Arrays.toString(constraints) + "]";

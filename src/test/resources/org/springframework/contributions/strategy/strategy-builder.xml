@@ -4,38 +4,73 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.springframework.org/schema/contributions http://www.springframework.org/schema/contributions/spring-contributions-3.0.xsd">
 
-	<bean id="TemperStrategy" class="org.springframework.contributions.ioc.services.strategy.StrategyFactoryBean">
-		<constructor-arg value="org.springframework.contributions.strategy.TemperStrategyService" />
+	<bean id="currency2EureConversionStrategy" class="org.springframework.contributions.ioc.services.strategy.StrategyFactoryBean">
+		<constructor-arg value="org.springframework.contributions.strategy.ConversionStrategy" />
 		<constructor-arg>
-			<ctr:mapped-contribution-ref name="temperStrategies" />
+			<ctr:mapped-contribution-ref name="conversionStrategies" />
 		</constructor-arg>
 	</bean>
 	
-	<bean id="red" class="org.springframework.contributions.strategy.strategies.RedTemperStrategy" />
+	<bean id="usDollar" class="org.springframework.contributions.strategy.strategies.UsDollar2EuroStrategy" />
 	
-	<bean id="green" class="org.springframework.contributions.strategy.strategies.GreenTemperStrategy" />
+	<bean id="swissFranc" class="org.springframework.contributions.strategy.strategies.SwissFranc2EuroStrategy" />
 	
-	<bean id="color" class="org.springframework.contributions.strategy.strategies.ColorTemperStrategy" />
+	<bean id="greekDrachma" class="org.springframework.contributions.strategy.strategies.GreekDrachma2EuroStrategy" />
 	
-	<ctr:mapped-contribution to="temperStrategies">
+	<ctr:mapped-contribution to="conversionStrategies">
 		<entry>
 			<key>
-				<value>org.springframework.contributions.strategy.entities.Red</value>
+				<value>org.springframework.contributions.strategy.entities.UsDollar</value>
 			</key>
-			<ref bean="red" />
+			<ref bean="usDollar" />
 		</entry>
 		<entry>
 			<key>
-				<value>org.springframework.contributions.strategy.entities.Green</value>
+				<value>org.springframework.contributions.strategy.entities.SwissFranc</value>
 			</key>
-			<ref bean="green" />
+			<ref bean="swissFranc" />
 		</entry>
 		<entry>
 			<key>
-				<value>org.springframework.contributions.strategy.Color</value>
+				<value>org.springframework.contributions.strategy.entities.GreekDrachma</value>
 			</key>
-			<ref bean="color" />
+			<ref bean="greekDrachma" />
 		</entry>
 	</ctr:mapped-contribution>
+
+	<bean id="stringFormatStrategy" class="org.springframework.contributions.ioc.services.strategy.StrategyFactoryBean">
+		<constructor-arg value="org.springframework.contributions.strategy.StringFormatStrategy" />
+		<constructor-arg>
+			<ctr:mapped-contribution-ref name="stringFormatStrategies" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="upperCase" class="org.springframework.contributions.strategy.strategies.UpperCaseStringFormatStrategy" />
+	
+	<bean id="blankSeparated" class="org.springframework.contributions.strategy.strategies.BlankSeparatedStringFormatStrategy" />
+	
+	<bean id="reversed" class="org.springframework.contributions.strategy.strategies.ReversedStringFormatStrategy" />
+	
+	<ctr:mapped-contribution to="stringFormatStrategies">
+		<entry>
+			<key>
+				<value>org.springframework.contributions.strategy.entities.UpperCase</value>
+			</key>
+			<ref bean="upperCase" />
+		</entry>
+		<entry>
+			<key>
+				<value>org.springframework.contributions.strategy.entities.BlankSeparated</value>
+			</key>
+			<ref bean="blankSeparated" />
+		</entry>
+		<entry>
+			<key>
+				<value>org.springframework.contributions.strategy.entities.Reversed</value>
+			</key>
+			<ref bean="reversed" />
+		</entry>
+	</ctr:mapped-contribution>
+
 
 </beans>

@@ -1,14 +1,11 @@
 package org.springframework.contributions.ordered;
 
 import static org.springframework.contributions.ContributionsNamespaceHandler.CONTRIBUTION_NAMESPACE;
-import static org.springframework.contributions.ContributionsNamespaceHandler.ORDERED_CONTRIBUTION_PREFIX;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.beans.factory.support.ManagedList;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
@@ -27,41 +24,19 @@ public class OrderedContributionBeanDefinitionParser implements BeanDefinitionPa
     public BeanDefinition parse(final Element element, final ParserContext parserContext)
     {
         String contributionName = element.getAttribute("to");
-        String beanName = ORDERED_CONTRIBUTION_PREFIX + contributionName;
-
-        BeanDefinitionRegistry registry = parserContext.getRegistry();
-        BeanDefinition beanDefinition;
-        List contributionList;
-        if (registry.containsBeanDefinition(beanName))
-        {
-            beanDefinition = registry.getBeanDefinition(beanName);
-            contributionList = (List) beanDefinition.getPropertyValues().getPropertyValue("contributionList")
-                .getValue();
-        }
-        else
-        {
-            BeanDefinitionBuilder builder = BeanDefinitionBuilder
-                .rootBeanDefinition(OrderedConfigurationFactoryBean.class);
-            contributionList = new ManagedList();
-            builder.addPropertyValue("contributionList", contributionList);
-            beanDefinition = builder.getBeanDefinition();
-
-            registry.registerBeanDefinition(beanName, beanDefinition);
-        }
 
         NodeList entryList = element.getElementsByTagNameNS(CONTRIBUTION_NAMESPACE, "entry");
+        List<OrderedContributionBeenContext> beans = new ArrayList<OrderedContributionBeenContext>();
         for (int i = 0; i < entryList.getLength(); i++)
         {
             Element entry = (Element) entryList.item(i);
             String name = entry.getAttribute("name");
             String constraints = entry.getAttribute("constraints");
             Object beanValueOrReference = parserContext.getDelegate().parsePropertyValue(entry, null, name);
-            contributionList.add(OrderContributionUtils.createContributionBeanDefinition(
-                name,
-                beanValueOrReference,
-                constraints));
+            beans.add(new OrderedContributionBeenContext(name, beanValueOrReference, constraints));
         }
         
-        return beanDefinition;
+        return OrderContributionUtils.parse(contributionName, beans, parserContext.getRegistry());
     }
+    
 }

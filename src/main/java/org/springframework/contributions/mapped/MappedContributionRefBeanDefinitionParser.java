@@ -18,14 +18,12 @@ import org.w3c.dom.Element;
  */
 public class MappedContributionRefBeanDefinitionParser extends AbstractSingleBeanDefinitionParser
 {
-    @Override
     @SuppressWarnings("rawtypes")
     protected Class getBeanClass(Element element)
     {
         return BeanReferenceFactoryBean.class;
     }
 
-    @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder)
     {
         String contributionName = element.getAttribute("name");

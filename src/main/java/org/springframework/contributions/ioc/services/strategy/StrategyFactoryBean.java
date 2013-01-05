@@ -43,13 +43,11 @@ public class StrategyFactoryBean<T> extends AbstractFactoryBean<T>
 		this.registry = StrategyRegistry.newInstance(adapterType, registrations);
 	}
 
-	@Override
 	protected T createInstance() throws Exception
 	{
 		return build();
 	}
 
-	@Override
 	public Class getObjectType()
 	{
 		return adapterType;

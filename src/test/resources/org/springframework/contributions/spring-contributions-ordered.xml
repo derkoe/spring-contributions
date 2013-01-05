@@ -13,11 +13,8 @@
 	<bean id="Two" class="org.springframework.contributions.impl.CallableTwo">
 		<constructor-arg ref="logBuffer" />
 		<constructor-arg ref="twoValue" />
+		<ctr:contribute to="callables" constraints="after:One" />
 	</bean>
-
-	<ctr:contribution to="callables">
-		<ctr:entry name="Two" ref="Two" constraints="after:One"/>
-	</ctr:contribution>
 
 	<bean id="twoValue" class="java.lang.String">
 		<constructor-arg value="Two"/>

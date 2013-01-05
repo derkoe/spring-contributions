@@ -177,7 +177,6 @@ public final class Orderer
         /**
          * @see java.lang.Object#toString()
          */
-        @Override
         public String toString()
         {
             final StringBuilder builder = new StringBuilder(getId());

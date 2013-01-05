@@ -6,6 +6,9 @@ import static org.junit.Assert.assertThat;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +24,22 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 @RunWith(SpringJUnit4ClassRunner.class)
 public class OrderedContributionIntegrationTest
 {
-	@Autowired
+	@Inject
 	private CallService testService;
 
-	@Autowired
+	@Inject
 	private CallableHolderService secondService;
 
-	@Autowired
+	@Inject
 	private ServiceWithoutContribution serviceWithoutContribution;
 
-	@Autowired
+	@Inject
 	private StringBuilder logBuffer;
 	
-	@Autowired
+	@Inject
 	private ValueHolder stringHolder;
 	
-	@Autowired
+	@Inject
 	private Hen hen;
 
 	@Test
