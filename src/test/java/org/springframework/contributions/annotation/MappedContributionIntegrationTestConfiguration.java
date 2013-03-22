@@ -23,13 +23,13 @@ public abstract class MappedContributionIntegrationTestConfiguration
 {
 
 	@Bean(name="strategyCaller")
-	public StrategyCallerImpl strategyCaller(MappedContributionResolver<Map<Class, Strategy>> strategies) throws Exception
+	public StrategyCallerImpl strategyCaller(MappedContributionResolver<Map<Class, Strategy>> strategies)
 	{
 		return new StrategyCallerImpl(strategies.resolve("strategies"));
 	}
 
 	@Bean(name="emptyStrategyCaller")
-	public EmptyStrategyCallerImpl emptyStrategyCaller(MappedContributionResolver<Map<Class, Strategy>> strategies) throws Exception
+	public EmptyStrategyCallerImpl emptyStrategyCaller(MappedContributionResolver<Map<Class, Strategy>> strategies)
 	{
 		return new EmptyStrategyCallerImpl(strategies.resolve("emptyStrategies"));
 	}
