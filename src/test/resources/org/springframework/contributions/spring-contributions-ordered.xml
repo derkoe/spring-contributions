@@ -39,7 +39,7 @@
 
 	<bean name="logBuffer" class="java.lang.StringBuilder" />
 
-	<bean class="org.springframework.contributions.ValueHolder">
+	<bean name="valueHolder" class="org.springframework.contributions.ValueHolder">
 		<constructor-arg>
 			<ctr:contribution-ref name="value-list" />
 		</constructor-arg>
