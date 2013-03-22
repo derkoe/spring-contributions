@@ -37,7 +37,7 @@ public abstract class StrategyFactoryBeanIntegrationTestConfiguration
 	// String format strategy test
 	////////////////////////////////////////////////////////////////////////
 	@Bean(name="stringFormatStrategy")
-	public StrategyFactoryBean strategyCaller(MappedContributionResolver<Map<Class, Strategy>> strategies) throws Exception
+	public StrategyFactoryBean strategyCaller(MappedContributionResolver<Map<Class, Strategy>> strategies)
 	{
 		return new StrategyFactoryBean(StringFormatStrategy.class, strategies.resolve("stringFormatStrategies"));
 	}
@@ -68,7 +68,7 @@ public abstract class StrategyFactoryBeanIntegrationTestConfiguration
 	////////////////////////////////////////////////////////////////////////
 	
 	@Bean(name="currency2EureConversionStrategy")
-	public StrategyFactoryBean emptyStrategyCaller(MappedContributionResolver<Map<Class, Strategy>> strategies) throws Exception
+	public StrategyFactoryBean emptyStrategyCaller(MappedContributionResolver<Map<Class, Strategy>> strategies)
 	{
 		return new StrategyFactoryBean(ConversionStrategy.class, strategies.resolve("conversionStrategies"));
 	}

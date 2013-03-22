@@ -49,7 +49,7 @@ public abstract class OrderedContributionIntegrationTestConfiguration
 	////////////////////////////////////////////////////////////////////////
 
 	@Bean(name="hen") @Lazy
-	public Hen hen(OrderedContributionResolver<Egg> eggs) throws Exception
+	public Hen hen(OrderedContributionResolver<Egg> eggs)
 	{
 		return new Hen(eggs.resolve("eggs"), "Foghorn Leghorn");
 	}
@@ -88,19 +88,19 @@ public abstract class OrderedContributionIntegrationTestConfiguration
 	}
 
 	@Bean(name="testService")
-	public CallService callService(OrderedContributionResolver<Callable> callables) throws Exception
+	public CallService callService(OrderedContributionResolver<Callable> callables)
 	{
 		return new CallServiceImpl(callables.resolve("callables"));
 	}
 
 	@Bean(name="callable")
-	public CallableHolderServiceImpl callableHolderService(OrderedContributionResolver<Callable> callables) throws Exception
+	public CallableHolderServiceImpl callableHolderService(OrderedContributionResolver<Callable> callables)
 	{
 		return new CallableHolderServiceImpl(callables.resolve("callables"));
 	}
 
 //	@Bean(name="callable") @Lazy
-//	public CallableHolderServiceImpl callableHolderService(@Named("callables") List<Callable> callables) throws Exception
+//	public CallableHolderServiceImpl callableHolderService(@Named("callables") List<Callable> callables)
 //	{
 //		return new CallableHolderServiceImpl(callables);
 //	}
