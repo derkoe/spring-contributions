@@ -23,49 +23,50 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 @RunWith(SpringJUnit4ClassRunner.class)
 public class OrderedContributionIntegrationTest
 {
-	@Inject
-	private CallService testService;
+    @Inject
+    private CallService testService;
 
-	@Inject
-	private CallableHolderService secondService;
+    @Inject
+    private CallableHolderService secondService;
 
-	@Inject
-	private ServiceWithoutContribution serviceWithoutContribution;
+    @Inject
+    private ServiceWithoutContribution serviceWithoutContribution;
 
-	@Inject
-	private StringBuilder logBuffer;
-	
-	@Inject
-	@Named("valueHolder")
-	private ValueHolder stringHolder;
-	
-	@Inject
-	private Hen hen;
+    @Inject
+    private StringBuilder logBuffer;
 
-	@Test
-	public void testOrderedContribution()
-	{
-		testService.callAll();
-		assertThat(logBuffer.toString(), is("OneTwoThree"));
+    @Inject
+    @Named("valueHolder")
+    private ValueHolder stringHolder;
 
-		List<Callable> callables = secondService.getCallables();
-		assertThat(callables.size(), is(3));
-	}
+    @Inject
+    private Hen hen;
 
-	@Test
-	public void testEmptyContribution()
-	{
-	    assertThat(serviceWithoutContribution.getEmptyContribution().size(), is(0));
-	}
+    @Test
+    public void testOrderedContribution()
+    {
+        testService.callAll();
+        assertThat(logBuffer.toString(), is("OneTwoThree"));
 
-	@Test
-	public void testStringContribution()
-	{
-		assertThat(stringHolder.getValues(), is(Arrays.asList("String 1", "String 2", "String 3")));
-	}
-	
-	@Test
-	public void testHenAndEggs() {
-		System.out.println(hen);
-	}
+        List<Callable> callables = secondService.getCallables();
+        assertThat(callables.size(), is(3));
+    }
+
+    @Test
+    public void testEmptyContribution()
+    {
+        assertThat(serviceWithoutContribution.getEmptyContribution().size(), is(0));
+    }
+
+    @Test
+    public void testStringContribution()
+    {
+        assertThat(stringHolder.getValues(), is(Arrays.asList("String 1", "String 2", "String 3")));
+    }
+
+    @Test
+    public void testHenAndEggs()
+    {
+        System.out.println(hen);
+    }
 }

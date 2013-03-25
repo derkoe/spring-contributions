@@ -7,10 +7,10 @@ import org.springframework.contributions.Strategy;
 
 public class IntegerStrategy implements Strategy<Integer>
 {
-	public String call(Integer object)
-	{
-		assertThat(object, is(Integer.class));
+    public String call(Integer object)
+    {
+        assertThat(object, is(Integer.class));
 
-		return object.toString();
-	}
+        return object.toString();
+    }
 }
