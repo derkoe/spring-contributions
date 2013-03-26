@@ -20,7 +20,6 @@ public class OrderedContributionBeanDefinitionParser implements BeanDefinitionPa
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
     public BeanDefinition parse(final Element element, final ParserContext parserContext)
     {
         String contributionName = element.getAttribute("to");

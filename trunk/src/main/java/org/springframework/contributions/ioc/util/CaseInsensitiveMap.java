@@ -131,7 +131,7 @@ public class CaseInsensitiveMap<V> extends AbstractMap<String, V> implements Ser
         }
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     private class EntrySet extends AbstractSet
     {
         public Iterator iterator()
@@ -338,7 +338,6 @@ public class CaseInsensitiveMap<V> extends AbstractMap<String, V> implements Ser
         return size;
     }
 
-    @SuppressWarnings("unchecked")
     public V put(String key, V value)
     {
         int hashCode = caseInsenitiveHashCode(key);
