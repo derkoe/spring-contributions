@@ -3,7 +3,7 @@
 
 = Introduction =
 
-Spring Contributions is a Spring extension providing a mechanism similar to the [http://tapestry.apache.org/tapestry5.1/tapestry-ioc/configuration.html Tapestry IoC Configurations].
+Spring Contributions is a Spring extension providing a mechanism similar to the [http://tapestry.apache.org/tapestry-ioc-configuration.html Tapestry IoC Configurations].
 
 Contributions allow extensibility and modularity for your services (Spring beans). It is basically dependency injection with your dependencies defined in modules that you do not know about. This enables Eclipse-like extensions of your current services.
 
