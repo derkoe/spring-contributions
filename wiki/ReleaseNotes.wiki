@@ -1,0 +1,19 @@
+#summary The release history of spring-contributions
+
+= Release Notes =
+
+== 1.2 (2013-03-26) ==
+
+ * NEW: issue 4 support Spring's Java based configuration
+
+== 1.1 (2011-12-01) ==
+
+ * NEW: StrategyFactoryBean for auto-creating GoF's strategy pattern
+
+== 1.0.1 (2011-06-09) ==
+ 
+ * FIX: issue 2 Some contributions to ordered are ignored
+
+== 1.0 (2011-04-29) ==
+
+ * Initial release
