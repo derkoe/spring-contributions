@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ctr="http://www.springframework.org/schema/contributions"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/contributions http://www.springframework.org/schema/contributions/spring-contributions-3.0.xsd">
+
+	<bean name="stringKeyObject" class="java.lang.Object" />
+	<bean name="enumOneKeyObject" class="java.lang.Object" />
+	<bean name="classKeyObject" class="java.lang.Object" />
+
+	<bean id="keyOne" class="org.springframework.contributions.annotation.KeyEnum" factory-method="valueOf">
+		<constructor-arg>
+		    <value>keyOne</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="keyClass" class="java.lang.Class" factory-method="forName" >
+		<constructor-arg>
+		    <value>org.springframework.contributions.annotation.KeyEnum</value>
+		</constructor-arg>
+	</bean>
+
+	<ctr:mapped-contribution to="mixedKeyMap">
+		<entry key="stringKey" value-ref="stringKeyObject" />
+		<entry key-ref="keyOne" value-ref="enumOneKeyObject" />
+		<entry key-ref="keyClass" value-ref="classKeyObject" />
+	</ctr:mapped-contribution>
+
+</beans>
