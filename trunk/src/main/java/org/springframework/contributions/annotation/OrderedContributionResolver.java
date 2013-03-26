@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.logging.impl.Log4JLogger;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -34,11 +33,12 @@ public class OrderedContributionResolver<T extends Object>
 	 * @param contribution the name of the desired ordered contribution bean
 	 * @return the contribution bean identified by its name, or an empty list if no contribution was found
 	 */
-	public List<T> resolve(String contribution)
+	@SuppressWarnings("unchecked")
+    public List<T> resolve(String contribution)
 	{
 		try
 		{
-			return (List<T>)context.getBean(ORDERED_CONTRIBUTION_PREFIX + contribution);
+			return (List<T>) context.getBean(ORDERED_CONTRIBUTION_PREFIX + contribution);
 		}
 		catch (Exception e)
 		{

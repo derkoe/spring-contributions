@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.logging.impl.Log4JLogger;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -34,16 +33,17 @@ public class MappedContributionResolver<T extends Map<?, ?>>
 	 * @param contribution the name of the desired mapped contribution bean
 	 * @return the contribution bean identified by its name, or an empty list if no contribution was found
 	 */
-	public T resolve(String contribution)
-	{
-		try
-		{
-			return (T)context.getBean(MAPPED_CONTRIBUTION_PREFIX + contribution);
-		}
-		catch (Exception e)
-		{
-			LOG.warn("Coluld not recieve the mapped contribution bean named '" + contribution + "'");
-		}
-		return (T)new HashMap();
-	}
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public T resolve(String contribution)
+    {
+        try
+        {
+            return (T) context.getBean(MAPPED_CONTRIBUTION_PREFIX + contribution);
+        }
+        catch (Exception e)
+        {
+            LOG.warn("Coluld not recieve the mapped contribution bean named '" + contribution + "'");
+        }
+        return (T) new HashMap();
+    }
 }
