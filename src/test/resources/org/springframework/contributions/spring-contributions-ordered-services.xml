@@ -18,4 +18,10 @@
 		</constructor-arg>
 	</bean>
 
+	<bean id="emptyHolder" class="org.springframework.contributions.impl.CallableHolderServiceImpl">
+		<constructor-arg>
+			<ctr:contribution-ref name="notExistent" />
+		</constructor-arg>
+	</bean>
+
 </beans>

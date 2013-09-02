@@ -22,14 +22,16 @@ public final class OrderContributionUtils
     {
     }
 
-    public static BeanDefinition parse(String contributionName, OrderedContributionBeenContext bean, BeanDefinitionRegistry registry)
+    public static BeanDefinition parse(String contributionName, OrderedContributionBeenContext bean,
+    	BeanDefinitionRegistry registry)
     {
     	List<OrderedContributionBeenContext> oneBean = new ArrayList<OrderedContributionBeenContext>(1);
     	oneBean.add(bean);
     	return parse(contributionName, oneBean, registry);
     }
 
-    public static BeanDefinition parse(String contributionName, List<OrderedContributionBeenContext> beans, BeanDefinitionRegistry registry)
+    public static BeanDefinition parse(String contributionName, List<OrderedContributionBeenContext> beans,
+    	BeanDefinitionRegistry registry)
     {
         String beanName = ORDERED_CONTRIBUTION_PREFIX + contributionName;
 

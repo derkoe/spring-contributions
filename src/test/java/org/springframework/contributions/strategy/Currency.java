@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 
 public interface Currency
 {
-	public BigDecimal getValue();
+	BigDecimal getValue();
 
-	public void setValue(BigDecimal value);
+	void setValue(BigDecimal value);
 
 }

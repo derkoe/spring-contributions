@@ -17,7 +17,7 @@ import org.springframework.context.ApplicationContext;
  *
  * @param <T>
  */
-public class MappedContributionResolver<T extends Map<?, ?>>
+public class MappedContributionResolver<K extends Object, V extends Object>
 {
 	private final Log LOG = LogFactory.getLog(MappedContributionResolver.class);
 
@@ -33,17 +33,18 @@ public class MappedContributionResolver<T extends Map<?, ?>>
 	 * @param contribution the name of the desired mapped contribution bean
 	 * @return the contribution bean identified by its name, or an empty list if no contribution was found
 	 */
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    public T resolve(String contribution)
-    {
-        try
-        {
-            return (T) context.getBean(MAPPED_CONTRIBUTION_PREFIX + contribution);
-        }
-        catch (Exception e)
-        {
-            LOG.warn("Coluld not recieve the mapped contribution bean named '" + contribution + "'");
-        }
-        return (T) new HashMap();
-    }
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public Map<K, V> resolve(String contribution)
+	{
+		try
+		{
+			return (Map<K, V>)context.getBean(MAPPED_CONTRIBUTION_PREFIX + contribution);
+		}
+		//TODO check this; here is the Java-Config way different to the XML-Config, which would throw an exception
+		catch (Exception e)
+		{
+			LOG.warn("Coluld not recieve the mapped contribution bean named '" + contribution + "'");
+		}
+		return (Map<K, V>)new HashMap();
+	}
 }

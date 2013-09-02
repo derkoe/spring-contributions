@@ -41,11 +41,13 @@ public class AnnotationContributionPostProcessor implements BeanDefinitionRegist
 				AnnotatedBeanDefinition beanDef = (AnnotatedBeanDefinition) beanDefinition;
 				
 				//handle ordered contributions
-				Set<MethodMetadata> orderedContributions = beanDef.getMetadata().getAnnotatedMethods(Contribution.class.getName());
+				Set<MethodMetadata> orderedContributions = beanDef.getMetadata().
+					getAnnotatedMethods(Contribution.class.getName());
 				handleOrderedContributions(beanFactory, orderedContributions);
 
 				//handle mapped contributions
-				Set<MethodMetadata> mappedContributions = beanDef.getMetadata().getAnnotatedMethods(ContributionMapped.class.getName());
+				Set<MethodMetadata> mappedContributions = beanDef.getMetadata().
+					getAnnotatedMethods(ContributionMapped.class.getName());
 				handleMappedContributions(beanFactory, mappedContributions);
 			}
 		}
@@ -78,7 +80,8 @@ public class AnnotationContributionPostProcessor implements BeanDefinitionRegist
 				}
 				catch (ClassNotFoundException e)
 				{
-					throw new FatalBeanException("Could not retrieve key class for adding the bean ' " + beanName + "to the mapped contribution '" + contributionName + "'", e);
+					throw new FatalBeanException("Could not retrieve key class for adding the bean ' " + beanName 
+						+ "to the mapped contribution '" + contributionName + "'", e);
 				}
 			}
 			else if (StringUtils.hasLength(keyString))
@@ -97,12 +100,14 @@ public class AnnotationContributionPostProcessor implements BeanDefinitionRegist
 				}
 				catch (ClassNotFoundException e)
 				{
-					throw new FatalBeanException("Could not retrieve key enum class for adding the bean ' " + beanName + "to the mapped contribution '" + contributionName + "'", e);
+					throw new FatalBeanException("Could not retrieve key enum class for adding the bean ' " + beanName 
+						+ "to the mapped contribution '" + contributionName + "'", e);
 				}
 			}
 			else
 			{
-				throw new FatalBeanException("No key was given for adding the bean ' " + beanName + "to the mapped contribution '" + contributionName + "'");
+				throw new FatalBeanException("No key was given for adding the bean ' " + beanName 
+					+ "to the mapped contribution '" + contributionName + "'");
 			}
 
 			MappedContributionUtils.addContribution(contributionName, map, (BeanDefinitionRegistry)beanFactory);
@@ -113,7 +118,8 @@ public class AnnotationContributionPostProcessor implements BeanDefinitionRegist
 	{
 		if (!map.isEmpty())
 		{
-			throw new FatalBeanException("More than one mapped contribution key type was defined for the bean '" + beanName + "'");
+			throw new FatalBeanException("More than one mapped contribution key type was defined for the bean '" 
+				+ beanName + "'");
 		}
 	}
 
@@ -129,14 +135,16 @@ public class AnnotationContributionPostProcessor implements BeanDefinitionRegist
 			String constraints = (String)attributes.get("constraints");
 			String beanName = getBeanName(metadata, attributes);
 			Object beanValueOrReference = beanFactory.getBeanDefinition(beanName);
-			OrderedContributionBeenContext beanContext = new OrderedContributionBeenContext(beanName, beanValueOrReference, constraints);
+			OrderedContributionBeenContext beanContext =
+				new OrderedContributionBeenContext(beanName, beanValueOrReference, constraints);
 			OrderContributionUtils.parse(contributionName, beanContext, (BeanDefinitionRegistry)beanFactory);
 		}
 	}
 
 	private String getBeanName(MethodMetadata metadata, Map<String, Object> attributes)
 	{
-		String beanName = StringUtils.hasLength((String)attributes.get("name"))? (String)attributes.get("name") : metadata.getMethodName();
+		String beanName = StringUtils.hasLength((String)attributes.get("name"))?
+			(String)attributes.get("name") : metadata.getMethodName();
 		return beanName;
 	}
 

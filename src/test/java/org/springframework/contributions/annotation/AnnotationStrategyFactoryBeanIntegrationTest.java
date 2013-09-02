@@ -30,17 +30,17 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 /**
- * This test is an equivalent of the {@link StrategyFactoryBeanIntegrationTest}
- * testing the annotation contribution mechanism.
+ * This test is an equivalent of the {@link StrategyFactoryBeanIntegrationTest} testing the
+ * annotation contribution mechanism.
  * 
  * @author Ortwin Probst
- *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes={AnnotationContributionConfig.class, StrategyFactoryBeanIntegrationTestConfiguration.class}, loader=AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {AnnotationContributionConfig.class,
+	StrategyFactoryBeanIntegrationTestConfiguration.class}, loader = AnnotationConfigContextLoader.class)
 public class AnnotationStrategyFactoryBeanIntegrationTest
 {
-	
+
 	@Inject
 	@Named("stringFormatStrategy")
 	private StringFormatStrategy<StringContainer> stringFormatStrategy;
@@ -54,7 +54,8 @@ public class AnnotationStrategyFactoryBeanIntegrationTest
 	{
 		Currency drachma = new GreekDrachma(10.0);
 		BigDecimal assertionValue = GreekDrachma2EuroStrategy.EXCHANGE_RATE.multiply(drachma.getValue());
-		assertThat(currency2EureConversionStrategy.convert(drachma).getValue(), is(new Euro(assertionValue).getValue()));
+		assertThat(currency2EureConversionStrategy.convert(drachma).getValue(),
+			is(new Euro(assertionValue).getValue()));
 
 		Currency dollar = new UsDollar(10.0);
 		assertionValue = UsDollar2EuroStrategy.EXCHANGE_RATE.multiply(dollar.getValue());
@@ -79,8 +80,8 @@ public class AnnotationStrategyFactoryBeanIntegrationTest
 		StringContainer blankSeparated = new BlankSeparated(value);
 		assertThat(stringFormatStrategy.format(blankSeparated), is("f o o b a r"));
 
-		assertThat(stringFormatStrategy.format(new BlankSeparated(stringFormatStrategy
-			.format(new Reversed(stringFormatStrategy.format(new UpperCase(value)))))), is("R A B O O F"));
+		assertThat(stringFormatStrategy.format(new BlankSeparated(stringFormatStrategy.format(new Reversed(
+			stringFormatStrategy.format(new UpperCase(value)))))), is("R A B O O F"));
 	}
 
 }

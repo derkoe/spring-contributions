@@ -23,50 +23,63 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 @RunWith(SpringJUnit4ClassRunner.class)
 public class OrderedContributionIntegrationTest
 {
-    @Inject
-    private CallService testService;
+	@Inject
+	private CallService testService;
 
-    @Inject
-    private CallableHolderService secondService;
+	@Inject
+	@Named("callableHolder")
+	private CallableHolderService callableHolder;
 
-    @Inject
-    private ServiceWithoutContribution serviceWithoutContribution;
+	@Inject
+	private ServiceWithoutContribution serviceWithoutContribution;
 
-    @Inject
-    private StringBuilder logBuffer;
+	@Inject
+	private StringBuilder logBuffer;
+	
+	@Inject
+	@Named("valueHolder")
+	private ValueHolder stringHolder;
+	
+	@Inject
+	private Hen hen;
 
-    @Inject
-    @Named("valueHolder")
-    private ValueHolder stringHolder;
+	@Inject
+	@Named("emptyHolder")
+	private CallableHolderService emptyHolder;
 
-    @Inject
-    private Hen hen;
+	@Test
+	public void testOrderedContribution()
+	{
+		testService.callAll();
+		assertThat(logBuffer.toString(), is("OneTwoThree"));
 
-    @Test
-    public void testOrderedContribution()
-    {
-        testService.callAll();
-        assertThat(logBuffer.toString(), is("OneTwoThree"));
+		List<Callable> callables = callableHolder.getCallables();
+		assertThat(callables.size(), is(3));
+	}
 
-        List<Callable> callables = secondService.getCallables();
-        assertThat(callables.size(), is(3));
-    }
+	@Test
+	public void testEmptyContribution()
+	{
+	    assertThat(serviceWithoutContribution.getEmptyContribution().size(), is(0));
+	}
 
-    @Test
-    public void testEmptyContribution()
-    {
-        assertThat(serviceWithoutContribution.getEmptyContribution().size(), is(0));
-    }
+	@Test
+	public void testStringContribution()
+	{
+		assertThat(stringHolder.getValues(), is(Arrays.asList("String 1", "String 2", "String 3")));
+	}
+	
+	@Test
+	public void testHenAndEggs()
+	{
+		assertThat(hen.getEggs().size(), is(3));
+		assertThat(hen.getName(), is(hen.getEggs().get(0).getByHen().getName()));
+		System.out.println(hen);
+	}
 
-    @Test
-    public void testStringContribution()
-    {
-        assertThat(stringHolder.getValues(), is(Arrays.asList("String 1", "String 2", "String 3")));
-    }
-
-    @Test
-    public void testHenAndEggs()
-    {
-        System.out.println(hen);
-    }
+	@Test
+	public void testMissingContribution()
+	{
+		assertThat(emptyHolder.getCallables().size(), is(0));
+	}
 }
