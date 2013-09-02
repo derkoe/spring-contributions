@@ -40,6 +40,7 @@ public class OrderedContributionResolver<T extends Object>
 		{
 			return (List<T>) context.getBean(ORDERED_CONTRIBUTION_PREFIX + contribution);
 		}
+		//TODO check this; here is the Java-Config way different to the XML-Config, which would throw an exception
 		catch (Exception e)
 		{
 			LOG.warn("Coluld not recieve the ordered contribution bean named '" + contribution + "'");

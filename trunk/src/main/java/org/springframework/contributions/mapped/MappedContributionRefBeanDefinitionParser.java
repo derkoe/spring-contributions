@@ -31,7 +31,8 @@ public class MappedContributionRefBeanDefinitionParser extends AbstractSingleBea
         String beanName = MAPPED_CONTRIBUTION_PREFIX + contributionName;
 		if (!registry.containsBeanDefinition(beanName))
         {
-			BeanDefinitionBuilder contributionBeanBuilder = BeanDefinitionBuilder.rootBeanDefinition(MapFactoryBean.class);
+			BeanDefinitionBuilder contributionBeanBuilder =
+				BeanDefinitionBuilder.rootBeanDefinition(MapFactoryBean.class);
 
             contributionBeanBuilder.addPropertyValue("sourceMap", new ManagedMap());
 

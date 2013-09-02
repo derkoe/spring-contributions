@@ -24,64 +24,77 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 /**
- * This test is an equivalent of the {@link OrderedContributionIntegrationTest} testing the annotation contribution
- * mechanism.
+ * This test is an equivalent of the {@link OrderedContributionIntegrationTest} testing the
+ * annotation contribution mechanism.
  * 
  * @author Ortwin Probst
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AnnotationContributionConfig.class,
-    OrderedContributionIntegrationTestConfiguration.class}, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {OrderedContributionIntegrationTestConfiguration.class},
+	loader = AnnotationConfigContextLoader.class)
 public class AnnotationOrderedContributionIntegrationTest
 {
-    @Inject
-    private ApplicationContext ctx;
 
-    @Inject
-    @Named("testService")
-    private CallService testService;
+	@Inject
+	private ApplicationContext ctx;
 
-    @Inject
-    @Named("callable")
-    private CallableHolderService secondService;
+	@Inject
+	@Named("testService")
+	private CallService testService;
 
-    @Inject
-    @Named("logBuffer")
-    private StringBuilder logBuffer;
+	@Inject
+	@Named("callable")
+	private CallableHolderService secondService;
 
-    @Inject
-    @Named("valueHolder")
-    private ValueHolder stringHolder;
+	@Inject
+	@Named("logBuffer")
+	private StringBuilder logBuffer;
 
-    @Inject
-    @Named("hen")
-    private Hen hen;
+	@Inject
+	@Named("valueHolder")
+	private ValueHolder stringHolder;
 
-    @Test
-    public void testAppConfig()
-    {
-        Assert.assertNotNull("CallableThree Bean not found", ctx.getBean("callableThree"));
-    }
+	@Inject
+	@Named("hen")
+	private Hen hen;
 
-    @Test
-    public void testOrderedContribution()
-    {
-        testService.callAll();
-        assertThat(logBuffer.toString(), is("OneTwoThree"));
+	@Inject
+	@Named("emptyHolder")
+	private CallableHolderService emptyHolder;
 
-        List<Callable> callables = secondService.getCallables();
-        assertThat(callables.size(), is(3));
-    }
+	@Test
+	public void testAppConfig()
+	{
+		Assert.assertNotNull("CallableThree Bean not found", ctx.getBean("callableThree"));
+	}
 
-    @Test
-    public void testStringContribution()
-    {
-        assertThat(stringHolder.getValues(), is(Arrays.asList("String 1", "String 2", "String 3")));
-    }
+	@Test
+	public void testOrderedContribution()
+	{
+		testService.callAll();
+		assertThat(logBuffer.toString(), is("OneTwoThree"));
 
-    @Test
-    public void testHenAndEggs()
-    {
-        System.out.println(hen);
-    }
+		List<Callable> callables = secondService.getCallables();
+		assertThat(callables.size(), is(3));
+	}
+
+	@Test
+	public void testStringContribution()
+	{
+		assertThat(stringHolder.getValues(), is(Arrays.asList("String 1", "String 2", "String 3")));
+	}
+
+	@Test
+	public void testHenAndEggs()
+	{
+		assertThat(hen.getEggs().size(), is(3));
+		assertThat(hen.getName(), is(hen.getEggs().get(0).getByHen().getName()));
+		System.out.println(hen);
+	}
+
+	@Test
+	public void testMissingContribution()
+	{
+		assertThat(emptyHolder.getCallables().size(), is(0));
+	}
 }

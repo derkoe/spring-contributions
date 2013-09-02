@@ -19,7 +19,9 @@ public class StrategyCallerImpl implements StrategyCaller
 		Class valueClass = value.getClass();
 		Strategy strategy = strategies.get(valueClass);
 		if (strategy == null)
+		{
 			throw new NullPointerException("No strategy for class: " + valueClass);
+		}
 		return strategy.call(value);
 	}
 }

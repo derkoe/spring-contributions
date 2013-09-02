@@ -45,7 +45,8 @@ public class ContributionBeanDefinitionDecorator implements BeanDefinitionDecora
             Element element = (Element) node;
             String contributionName = element.getAttribute("to");
             String constraints = element.getAttribute("constraints");
-            OrderedContributionBeenContext beanContext = new OrderedContributionBeenContext(beanName, definition, constraints);
+            OrderedContributionBeenContext beanContext =
+            	new OrderedContributionBeenContext(beanName, definition, constraints);
 
             addToContributionService(
                 contributionName,

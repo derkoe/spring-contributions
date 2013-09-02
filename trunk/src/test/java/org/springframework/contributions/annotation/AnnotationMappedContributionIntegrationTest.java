@@ -25,7 +25,8 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes={AnnotationContributionConfig.class, MappedContributionIntegrationTestConfiguration.class}, loader=AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes={MappedContributionIntegrationTestConfiguration.class},
+	loader=AnnotationConfigContextLoader.class)
 public class AnnotationMappedContributionIntegrationTest
 {
 
@@ -38,7 +39,7 @@ public class AnnotationMappedContributionIntegrationTest
 	private StrategyCaller emptyCaller;
 
 	@Inject
-	private MappedContributionResolver<Map<String, Object>> mixedKeyMapResolver;
+	private MappedContributionResolver<String, Object> mixedKeyMapResolver;
 
 	@Test
 	public void testPositives()

@@ -25,7 +25,7 @@ public @interface ContributionMapped
 	 * 
 	 * @return
 	 */
-	String bean() default "";
+	String name() default "";
 
 	/**
 	 * The name of the mapped contribution bean where the contributed bean will be added to
@@ -35,7 +35,7 @@ public @interface ContributionMapped
 	String to();
 
 	/**
-	 * The name of the bean which will be used as the key in the mapped contribution for the bean to
+	 * The value which will be used as the key in the mapped contribution for the bean to
 	 * be contributed.
 	 * 
 	 * @return
