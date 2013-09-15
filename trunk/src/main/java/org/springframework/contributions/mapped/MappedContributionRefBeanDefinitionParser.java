@@ -12,7 +12,7 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 /**
- * Parser for references to mapped contributions.
+ * Parses <code>mapped-contribution-ref</code> element in Spring XML config.
  *
  * @author Christian K&ouml;berl
  */
@@ -27,8 +27,9 @@ public class MappedContributionRefBeanDefinitionParser extends AbstractSingleBea
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder)
     {
         String contributionName = element.getAttribute("name");
-        BeanDefinitionRegistry registry = parserContext.getRegistry();
         String beanName = MAPPED_CONTRIBUTION_PREFIX + contributionName;
+        
+        BeanDefinitionRegistry registry = parserContext.getRegistry();
 		if (!registry.containsBeanDefinition(beanName))
         {
 			BeanDefinitionBuilder contributionBeanBuilder =

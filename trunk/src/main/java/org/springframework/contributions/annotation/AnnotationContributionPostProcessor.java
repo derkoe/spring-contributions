@@ -110,7 +110,7 @@ public class AnnotationContributionPostProcessor implements BeanDefinitionRegist
 					+ "to the mapped contribution '" + contributionName + "'");
 			}
 
-			MappedContributionUtils.addContribution(contributionName, map, (BeanDefinitionRegistry)beanFactory);
+			MappedContributionUtils.addToContribution(contributionName, map, (BeanDefinitionRegistry)beanFactory);
 		}
 	}
 
@@ -137,7 +137,7 @@ public class AnnotationContributionPostProcessor implements BeanDefinitionRegist
 			Object beanValueOrReference = beanFactory.getBeanDefinition(beanName);
 			OrderedContributionBeenContext beanContext =
 				new OrderedContributionBeenContext(beanName, beanValueOrReference, constraints);
-			OrderContributionUtils.parse(contributionName, beanContext, (BeanDefinitionRegistry)beanFactory);
+			OrderContributionUtils.addToContribution(contributionName, beanContext, (BeanDefinitionRegistry)beanFactory);
 		}
 	}
 
