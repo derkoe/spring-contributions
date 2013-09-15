@@ -28,6 +28,6 @@ public class MappedContributionBeanDefinitionParser implements BeanDefinitionPar
         element.setAttribute("merge", "true");
         Map parsedMap = parserContext.getDelegate().parseMapElement(element, builder.getRawBeanDefinition());
 
-        return MappedContributionUtils.addContribution(contributionName, parsedMap, parserContext.getRegistry());
+        return MappedContributionUtils.addToContribution(contributionName, parsedMap, parserContext.getRegistry());
     }
 }

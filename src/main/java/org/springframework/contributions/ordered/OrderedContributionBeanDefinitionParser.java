@@ -35,7 +35,7 @@ public class OrderedContributionBeanDefinitionParser implements BeanDefinitionPa
             beans.add(new OrderedContributionBeenContext(name, beanValueOrReference, constraints));
         }
         
-        return OrderContributionUtils.parse(contributionName, beans, parserContext.getRegistry());
+        return OrderContributionUtils.addToContribution(contributionName, beans, parserContext.getRegistry());
     }
     
 }

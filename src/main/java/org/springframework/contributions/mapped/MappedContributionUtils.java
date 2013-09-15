@@ -11,7 +11,7 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 
 public class MappedContributionUtils
 {
-    public static BeanDefinition addContribution(String contributionName, Map map, BeanDefinitionRegistry registry)
+    public static BeanDefinition addToContribution(String contributionName, Map map, BeanDefinitionRegistry registry)
     {
         final String beanName = MAPPED_CONTRIBUTION_PREFIX + contributionName;
         BeanDefinition beanDefinition;
