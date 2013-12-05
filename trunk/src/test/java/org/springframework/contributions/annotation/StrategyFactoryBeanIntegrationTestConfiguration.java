@@ -27,8 +27,9 @@ import org.springframework.contributions.strategy.strategies.UsDollar2EuroStrate
  * @author Ortwin Probst
  */
 @Configuration
+@EnableContributions
 @EnableAspectJAutoProxy
-public abstract class StrategyFactoryBeanIntegrationTestConfiguration
+public class StrategyFactoryBeanIntegrationTestConfiguration
 {
 
 	// /////////////////////////////////////////////////////////////////////

@@ -36,8 +36,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
  * @author Ortwin Probst
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AnnotationContributionConfig.class,
-	StrategyFactoryBeanIntegrationTestConfiguration.class}, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {StrategyFactoryBeanIntegrationTestConfiguration.class}, loader = AnnotationConfigContextLoader.class)
 public class AnnotationStrategyFactoryBeanIntegrationTest
 {
 
@@ -54,8 +53,7 @@ public class AnnotationStrategyFactoryBeanIntegrationTest
 	{
 		Currency drachma = new GreekDrachma(10.0);
 		BigDecimal assertionValue = GreekDrachma2EuroStrategy.EXCHANGE_RATE.multiply(drachma.getValue());
-		assertThat(currency2EureConversionStrategy.convert(drachma).getValue(),
-			is(new Euro(assertionValue).getValue()));
+		assertThat(currency2EureConversionStrategy.convert(drachma).getValue(), is(new Euro(assertionValue).getValue()));
 
 		Currency dollar = new UsDollar(10.0);
 		assertionValue = UsDollar2EuroStrategy.EXCHANGE_RATE.multiply(dollar.getValue());
