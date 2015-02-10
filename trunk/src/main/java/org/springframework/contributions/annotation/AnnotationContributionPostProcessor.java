@@ -67,42 +67,24 @@ public class AnnotationContributionPostProcessor implements BeanDefinitionRegist
 			ManagedMap map = new ManagedMap();
 			map.setMergeEnabled(true);
 
-			String keyClassName = (String)attributes.get("keyClass");
-			String keyString = (String)attributes.get("key");
-			String keyEnumClassName = (String)attributes.get("keyEnumClass");
+			Class keyClass = (Class) attributes.get("keyClass");
+			String keyString = (String) attributes.get("key");
+			Class keyEnumClass = (Class) attributes.get("keyEnumClass");
 
-			if (!keyClassName.equals(ContributionMapped.class.getName()))
+			if (!keyClass.equals(ContributionMapped.class))
 			{
-				try
-				{
-					Class keyType = Class.forName(keyClassName);
-					map.put(keyType, beanValueOrReference);
-				}
-				catch (ClassNotFoundException e)
-				{
-					throw new FatalBeanException("Could not retrieve key class for adding the bean ' " + beanName 
-						+ "to the mapped contribution '" + contributionName + "'", e);
-				}
+			    map.put(keyClass, beanValueOrReference);
 			}
 			else if (StringUtils.hasLength(keyString))
 			{
 				verifyUniqueKeyDefinition(beanName, map);
 				map.put(keyString, beanValueOrReference);
 			}
-			else if (!keyEnumClassName.equals(NoEnumKey.class.getName()))
+			else if (!keyEnumClass.equals(NoEnumKey.class))
 			{
 				verifyUniqueKeyDefinition(beanName, map);
-				try
-				{
-					Class keyEnumClass = Class.forName(keyEnumClassName);
-					String enumValue = (String)attributes.get("keyEnumValue");
-					map.put(Enum.valueOf(keyEnumClass, enumValue), beanValueOrReference);
-				}
-				catch (ClassNotFoundException e)
-				{
-					throw new FatalBeanException("Could not retrieve key enum class for adding the bean ' " + beanName 
-						+ "to the mapped contribution '" + contributionName + "'", e);
-				}
+				String enumValue = (String)attributes.get("keyEnumValue");
+				map.put(Enum.valueOf(keyEnumClass, enumValue), beanValueOrReference);
 			}
 			else
 			{

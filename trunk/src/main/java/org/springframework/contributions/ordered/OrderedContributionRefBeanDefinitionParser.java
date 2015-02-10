@@ -1,13 +1,13 @@
 package org.springframework.contributions.ordered;
 
-import static org.springframework.contributions.ContributionsNamespaceHandler.ORDERED_CONTRIBUTION_PREFIX;
+import static org.springframework.contributions.ContributionsNamespaceHandler.*;
 
-import org.springframework.beans.factory.config.BeanReferenceFactoryBean;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.ManagedList;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.contributions.util.BeanReferenceFactoryBean;
 import org.w3c.dom.Element;
 
 /**
