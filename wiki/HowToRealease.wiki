@@ -2,7 +2,7 @@
 
 = Introduction =
 
-The release is performed to the Sonatype OSS Maven repository - which can push artifacts to Maven central (see https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide).
+The release is performed to the Sonatype OSS Maven repository - which can push artifacts to Maven central (see http://central.sonatype.org/pages/apache-maven.html).
 
 = Prerequisites = 
 
