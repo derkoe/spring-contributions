@@ -6,9 +6,9 @@ The release is performed to the Sonatype OSS Maven repository - which can push a
 
 = Prerequisites = 
 
- * JDK 5+ is installed on your command line path.
+ * JDK 6+ is installed on your command line path.
  * Subversion 1.5+ is installed on your command line path. 
- * Maven 2.2.1+ is installed on your command line path.
+ * Maven 3.1+ is installed on your command line path.
  * A GPG client is installed on your command line path. For more information, please refer to http://www.gnupg.org/.
  * You have created your GPG keys and distributed your public key to hkp://pool.sks-keyservers.net/. For more information, please refer to How To Generate PGP Signatures With Maven.
  * Add the following servers to your Maven settings.xml: 
