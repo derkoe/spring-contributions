@@ -38,7 +38,7 @@ public class MappedContributionResolver<K extends Object, V extends Object>
 	{
 		try
 		{
-			return (Map<K, V>)context.getBean(MAPPED_CONTRIBUTION_PREFIX + contribution);
+			return (Map<K, V>) context.getBean(MAPPED_CONTRIBUTION_PREFIX + contribution);
 		}
 		//TODO check this; here is the Java-Config way different to the XML-Config, which would throw an exception
 		catch (Exception e)

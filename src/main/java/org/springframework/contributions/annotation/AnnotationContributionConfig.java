@@ -1,9 +1,13 @@
 package org.springframework.contributions.annotation;
 
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Role;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 /**
  * This configuration class can be used to enable the spring-conribution mechanism in springs java
@@ -19,8 +23,9 @@ public class AnnotationContributionConfig
 	// Ordered contribution infrastructure
 	// //////////////////////////////////////////////////////////////////////
 
-	@Bean()
-	public static BeanFactoryPostProcessor bindContributionPostProcessor()
+	@Bean
+	@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
+	public BeanFactoryPostProcessor bindContributionPostProcessor()
 	{
 		return new AnnotationContributionPostProcessor();
 	}
