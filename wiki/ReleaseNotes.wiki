@@ -2,6 +2,10 @@
 
 = Release Notes =
 
+== 2.0.0 (2015-02-11) ==
+
+ * CHG: Update to Spring 4.1
+
 == 1.2 (2013-03-26) ==
 
  * NEW: issue 4 support Spring's Java based configuration
